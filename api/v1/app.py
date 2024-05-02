@@ -21,5 +21,3 @@ if __name__ == '__main__':
 def teardown_db(exception):
     """closes the storage on teardown"""
     storage.close()
-
-
