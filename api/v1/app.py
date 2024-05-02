@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Start Flask app"""
-from flask import Flask
+from flask import Flask, jsonify, make_response
 from api.v1.views import app_views
 from models import storage
 import os
@@ -15,6 +15,11 @@ port = int(os.getenv('HBNB_API_PORT', 5000))
 # Run Flask application with specified host, port, and threaded=True
 if __name__ == '__main__':
     app.run(host=host, port=port, threaded=True)
+
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return make_response(jsonify({"error": "Not found"}), 404)
 
 
 @app.teardown_appcontext
